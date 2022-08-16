@@ -1,8 +1,11 @@
 import express from 'express'
-import { getMessages, getMessage, editMessage, deleteMessage } from '../controllers/message.js'
+import { sendMessage, getMessages, getMessage, editMessage, deleteMessage } from '../controllers/message.js'
 import { verifyAdmin } from '../utils/verifyAdmin.js'
 
 const router = express.Router()
+
+// SEND MESSAGE
+router.post('/send-message', sendMessage)
 
 // GET STACKS
 

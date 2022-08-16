@@ -1,4 +1,38 @@
+import sgMail from '@sendgrid/mail'
 import Message from '../models/Message.js'
+import {
+  contactEmail
+} from '../index.js'
+
+export const sendMessage = async (req, res) => {
+  const sentMessage = new Message(req.body)
+
+    try {
+      await sentMessage.save()
+
+      const mail = {
+        from: process.env.EMAIL,
+        to: req.body.email,
+        subject: req.body.subject,
+        html: `<p>Thank you for contacting me. I will get back to you shortly :)</p>`,
+      };
+      contactEmail.sendMail(mail, (error) => {
+        if (error) {
+          res.json({
+            status: "ERROR"
+          });
+        } else {
+          res.json({
+            status: "Message Sent"
+          });
+        }
+      });
+
+      res.status(201).json({ status: "Message saved", data: { sentMessage } })
+    } catch (error) {
+      res.status(500).json("Failed to save", { message: error })
+    }
+}
 
 export const getMessages = async (req, res) => {
   const getMessages = await Message.find()
