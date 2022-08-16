@@ -8,6 +8,8 @@ import usersRoute from './routes/users.js'
 import detailsRoute from './routes/details.js'
 import stacksRoute from './routes/stacks.js'
 import contactsRoute from './routes/contacts.js'
+import projectsRoute from './routes/projects.js'
+import profilesRoute from './routes/profiles.js'
 import cookieParser from "cookie-parser"
 
 const app = express()
@@ -63,6 +65,8 @@ app.use('/users', usersRoute)
 app.use('/details', detailsRoute)
 app.use('/stacks', stacksRoute)
 app.use('/contacts', contactsRoute)
+app.use('/projects', projectsRoute)
+app.use('/profiles', profilesRoute)
 
 // Error handling middleware
 
